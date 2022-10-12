@@ -4,4 +4,6 @@ import router from "./router";
 import axios from "axios";
 import "bootstrap";
 
+axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "/";
+
 createApp(App).use(router).mount("#app");

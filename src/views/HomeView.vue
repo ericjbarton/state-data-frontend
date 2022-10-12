@@ -1,5 +1,10 @@
 <template>
-  <div class="State Data"></div>
+  <div class="Home"></div>
+  <div v-for="state in states" v-bind:key="state.id">
+    <h3>{{ state.state }}</h3>
+    <p>Median Household Income</p>
+    <h5>{{ state.median_household_income }}</h5>
+  </div>
 </template>
 
 <script>
@@ -11,7 +16,6 @@ export default {
       name: "StateData",
       states: [],
       currentState: {},
-      stateFilter: "",
     };
   },
   created: function () {
@@ -22,13 +26,6 @@ export default {
       axios.get("/states.json").then((response) => {
         this.states = response.data;
         console.log("All States:", this.states);
-      });
-    },
-    filterStates: function () {
-      return this.states.filter((state) => {
-        var lowerTitle = state.title.toLowerCase();
-        var lowerTitleFilter = this.stateFilter.toLowerCase();
-        return lowerTitle.includes(lowerTitleFilter);
       });
     },
   },
